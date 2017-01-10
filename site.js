@@ -98,13 +98,13 @@ var getPotentiallyOpenIssues = function (callback) {
     var easy = $.ajax({
         dataType: "json",
         url: issuesUrl,
-        data: "q=updated:" + olderThanTwoWeeks + "+state:open+label:C-assigned+label:E-Easy+-label:\"C-has%20open%20PR\"+user:bors-ng&sort=updated"
+        data: "q=updated:" + olderThanTwoWeeks + "+state:open+label:C-assigned+label:E-easy+-label:\"C-has-pr\"+user:bors-ng&sort=updated"
     });
 
     var lessEasy = $.ajax({
         dataType: "json",
         url: issuesUrl,
-        data: "q=updated:" + olderThanTwoWeeks + "+state:open+label:C-assigned+label:\"E-Less%20easy\"+-label:\"C-has%20open%20PR\"+user:bors-ng&sort=updated"
+        data: "q=updated:" + olderThanTwoWeeks + "+state:open+label:C-assigned+label:\"E-medium\"+-label:\"C-has-PR\"+user:bors-ng&sort=updated"
     });
 
     var dataExtractor = extractFunction(callback);
@@ -117,13 +117,13 @@ var getOpenIssues = function (callback) {
     var easy = $.ajax({
         dataType: "json",
         url: issuesUrl,
-        data: "q=state:open+-label:C-assigned+-label:S-blocked-on-external+label:E-Easy+user:bors-ng&sort=created"
+        data: "q=state:open+-label:C-assigned+-label:C-blocked-on-external+label:E-easy+user:bors-ng&sort=created"
     });
 
     var lessEasy = $.ajax({
         dataType: "json",
         url: issuesUrl,
-        data: "q=state:open+-label:C-assigned+-label:S-blocked-on-external+label:\"E-Less%20easy\"+user:bors-ng&sort=created"
+        data: "q=state:open+-label:C-assigned+-label:C-blocked-on-external+label:\"E-medium\"+user:bors-ng&sort=created"
     });
 
     var dataExtractor = extractFunction(callback);
