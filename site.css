@@ -54,7 +54,7 @@ a:hover {
     height: 75px;
     animation: rotation 2s infinite linear;
     background-repeat: no-repeat;
-    background-image: url(images/rust-logo.png);
+    background-image: url(images/icon.png);
     background-size: contain;
     text-align: center;
     margin: 20px auto;
@@ -118,4 +118,9 @@ h2 {
 
 .language-picker {
   text-align: center;
+}
+
+.foot {
+    margin-top: 2em;
+    color: #666;
 }

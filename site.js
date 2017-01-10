@@ -7,34 +7,32 @@ var timeSort = function (l, r) {
 };
 
 var repoDefaults = [
-    { repo: "highfive", language: "L-python" },
-    { repo: "servo-starters", language: "L-javascript" },
-    { repo: "crowbot", language: "L-javascript" },
-    { repo: "saltfs", language: "L-saltstack" },
+    { repo: "bors-ng", language: "L-elixir" },
+    { repo: "starters", language: "L-javascript" },
 ];
 
 var langLabels = [{
-        name: "L-rust",
-        color: "bfd4f2",
-        url:  "https://api.github.com/servo/servo/labels/L-rust",
+        name: "L-elixir",
+        color: "1d76db",
+        url:  "https://api.github.com/bors-ng/bors-ng/L-elixir",
         selected: true
     },
     {
-        name: "L-python",
-        color: "bfd4f2",
-        url:  "https://api.github.com/servo/servo/labels/L-python",
+        name: "L-iex",
+        color: "1d76db",
+        url:  "https://api.github.com/bors-ng/bors-ng/labels/L-iex",
         selected: true
     },
     {
         name: "L-javascript",
-        color: "bfd4f2",
-        url:  "https://api.github.com/servo/servo/labels/L-javascript",
+        color: "1d76db",
+        url:  "https://api.github.com/bors-ng/bors-ng/labels/L-javascript",
         selected: true
     },
     {
-        name: "L-saltstack",
-        color: "bfd4f2",
-        url:  "https://api.github.com/servo/servo/labels/L-saltstack",
+        name: "L-css",
+        color: "1d76db",
+        url:  "https://api.github.com/bors-ng/bors-ng/labels/L-css",
         selected: true
     },
 ];
@@ -54,9 +52,9 @@ var addDefaultLanguageLabel = function (issue) {
         return issue;
     }
 
-    var defaultLanguageLabelName = "L-rust";
+    var defaultLanguageLabelName = "L-elixir";
     for (var i = 0; i < repoDefaults.length; i++) {
-        var repoUrlSubStr = "servo/" + repoDefaults[i].repo + "/issues";
+        var repoUrlSubStr = "bors-ng/" + repoDefaults[i].repo + "/issues";
         if (issue.url && issue.url.match(repoUrlSubStr)) {
             defaultLanguageLabelName = repoDefaults[i].language;
             break;
@@ -100,13 +98,13 @@ var getPotentiallyOpenIssues = function (callback) {
     var easy = $.ajax({
         dataType: "json",
         url: issuesUrl,
-        data: "q=updated:" + olderThanTwoWeeks + "+state:open+label:C-assigned+label:E-Easy+-label:\"C-has%20open%20PR\"+user:servo&sort=updated"
+        data: "q=updated:" + olderThanTwoWeeks + "+state:open+label:C-assigned+label:E-Easy+-label:\"C-has%20open%20PR\"+user:bors-ng&sort=updated"
     });
 
     var lessEasy = $.ajax({
         dataType: "json",
         url: issuesUrl,
-        data: "q=updated:" + olderThanTwoWeeks + "+state:open+label:C-assigned+label:\"E-Less%20easy\"+-label:\"C-has%20open%20PR\"+user:servo&sort=updated"
+        data: "q=updated:" + olderThanTwoWeeks + "+state:open+label:C-assigned+label:\"E-Less%20easy\"+-label:\"C-has%20open%20PR\"+user:bors-ng&sort=updated"
     });
 
     var dataExtractor = extractFunction(callback);
@@ -119,13 +117,13 @@ var getOpenIssues = function (callback) {
     var easy = $.ajax({
         dataType: "json",
         url: issuesUrl,
-        data: "q=state:open+-label:C-assigned+-label:S-blocked-on-external+label:E-Easy+user:servo&sort=created"
+        data: "q=state:open+-label:C-assigned+-label:S-blocked-on-external+label:E-Easy+user:bors-ng&sort=created"
     });
 
     var lessEasy = $.ajax({
         dataType: "json",
         url: issuesUrl,
-        data: "q=state:open+-label:C-assigned+-label:S-blocked-on-external+label:\"E-Less%20easy\"+user:servo&sort=created"
+        data: "q=state:open+-label:C-assigned+-label:S-blocked-on-external+label:\"E-Less%20easy\"+user:bors-ng&sort=created"
     });
 
     var dataExtractor = extractFunction(callback);
@@ -148,7 +146,7 @@ var makeLabelFriendly = function (label) {
   var labelMap = {
     "E-easy": "Good first PR",
     "E-Easy": "Good first PR",
-    "E-less easy": "Mentored"
+    "E-medium": "Mentored"
   };
 
   if (labelMap[label]) {
