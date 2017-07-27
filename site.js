@@ -8,6 +8,7 @@ var timeSort = function (l, r) {
 
 var repoDefaults = [
     { repo: "bors-ng", language: "L-elixir" },
+    { repo: "bors-ng.github.io", language: "L-markdown" },
     { repo: "starters", language: "L-javascript" },
 ];
 
@@ -33,6 +34,12 @@ var langLabels = [{
         name: "L-css",
         color: "1d76db",
         url:  "https://api.github.com/bors-ng/bors-ng/labels/L-css",
+        selected: true
+    },
+    {
+        name: "L-markdown",
+        color: "1d76db",
+        url:  "https://api.github.com/bors-ng/bors-ng/labels/L-markdown",
         selected: true
     },
 ];
